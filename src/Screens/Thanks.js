@@ -13,7 +13,7 @@ function Thanks() {
   }, []);
   return (
     <>
-      <a href="https://api.whatsapp.com/send/?phone=919821219819&text&type=phone_number&app_absent=0" class="float" target="_blank">
+      <a href="https://api.whatsapp.com/send/?phone=918800226635&text&type=phone_number&app_absent=0" class="float" target="_blank">
         <i class="fab fa-whatsapp xl"></i>
       </a>
       <SocialHeader />
