@@ -67,12 +67,10 @@ function HomeForm() {
       checkLastPage(querySnapshot);
     } catch (error) {
       console.error("Error fetching home data:", error);
-      // Handle error state or retry logic
     }
   };
 
   const checkLastPage = (querySnapshot) => {
-    // Check if there are no more documents to fetch
     const isLastPage = querySnapshot.docs.length < 100;
     setLastPage(isLastPage);
   };
@@ -81,20 +79,13 @@ function HomeForm() {
     if (fromDate && toDate) {
       const from = new Date(fromDate);
       const to = new Date(toDate);
-  
-      // Set the time of `from` to the start of the day
       from.setHours(0, 0, 0, 0);
-  
-      // Set the time of `to` to the end of the day
       to.setHours(23, 59, 59, 999);
-  
-      // Filter the `homeData` array without appending it to previous state
       const filteredData = homeData.filter((item) => {
         const itemDate = new Date(item.date);
         return itemDate >= from && itemDate <= to;
       });
   
-      // Set the filtered data, replacing the previous data
       setFilteredHomeData(filteredData);
     } else {
       alert("Please select both from and to dates");
@@ -112,16 +103,10 @@ function HomeForm() {
       const docRef = doc(db, "homefromrecord", e.target.id);
       
       try {
-        // Deleting the document from Firestore
         await deleteDoc(docRef);
-        
-        // Removing the deleted item from the state immediately
         setHomeData((prevData) => prevData.filter((item) => item.id !== e.target.id));
         setFilteredHomeData((prevData) => prevData.filter((item) => item.id !== e.target.id));
-        
-        // Alert the user about successful deletion
         alert("Deleted Successfully");
-        // fetchHomeFormData();
         
       } catch (error) {
         console.error("Error deleting document:", error);
