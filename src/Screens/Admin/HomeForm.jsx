@@ -28,7 +28,7 @@ function HomeForm() {
   useEffect(() => {
     getUserAuth();
     fetchHomeFormData();
-  }, [currentPage]); 
+  }, [currentPage]); // Reload data when page changes
 
   const getUserAuth = async () => {
     onAuthStateChanged(auth, (user) => {
@@ -67,10 +67,12 @@ function HomeForm() {
       checkLastPage(querySnapshot);
     } catch (error) {
       console.error("Error fetching home data:", error);
+      // Handle error state or retry logic
     }
   };
 
   const checkLastPage = (querySnapshot) => {
+    // Check if there are no more documents to fetch
     const isLastPage = querySnapshot.docs.length < 100;
     setLastPage(isLastPage);
   };
@@ -92,8 +94,6 @@ function HomeForm() {
     }
   };
   
-  
-  
 
   const deleteBtnClick = async (e) => {
     e.preventDefault();
@@ -114,9 +114,6 @@ function HomeForm() {
       }
     }
   };
-  
-
-
   const handleNextPage = () => {
     setCurrentPage(currentPage + 1);
     setHomeData([]);
@@ -183,7 +180,7 @@ function HomeForm() {
                   <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                  
                     <table className="min-w-full divide-y divide-gray-200">
-                      <thead className="bg-gray-50">
+                    <thead className="bg-gray-50">
                         <tr>
                           <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Date
